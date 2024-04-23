@@ -21,6 +21,8 @@
         <cffunction name="doLogin" access="remote" returnformat="json">
             <cfargument name="userName" required="true">
             <cfargument name="password" required="true">
+            <cfset tempPassword=Hash(arguments.password,"MD5")>
+            <cfdump var = "#tempPassword#" >
             
             <cfquery name="checkLogin" result="loginCheck">
                 select userId,userName,password,role from loginTable

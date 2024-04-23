@@ -54,7 +54,10 @@ $(document).ready(function() {
                         $("#error").html(response.msg);    
                         return false;
                     }
-                }
+                },
+                error: function(xhr, status, error) {
+                    console.log("An error occurred: " + error);
+                } 
             });
         }
         return false;
@@ -78,29 +81,32 @@ $(document).ready(function() {
                     //$("#"+pageId).remove();
                 } 
             },
+            error: function(xhr, status, error) {
+                console.log("An error occurred: " + error);
+            } 
         });
         return true;
     });
 
 
     function validation(){
-        var allParas="";
+        var errorMsg="";
         var pageName = $('#pageName').val().trim();
         var pageDes = $('#pageDes').val().trim();
         if(pageName==''){  
-            allParas+="<br>Page name is required"; 
+            errorMsg+="<br>Page name is required"; 
         }
         else if (/\d/.test(pageName)) {
-            allParas+="<br>Page name should be string values";              
+            errorMsg+="<br>Page name should be string values";              
         }
         if(pageDes==''){
-            allParas+="<br>Page description is required";
+            errorMsg+="<br>Page description is required";
         }
         else if(!isNaN(pageDes)){
-            allParas+="<br>Page description required strings also";
+            errorMsg+="<br>Page description required strings also";
         }
-        if(allParas!==""){
-            $("#error").html(allParas);
+        if(errorMsg!==""){
+            $("#error").html(errorMsg);
             return false; 
         }
         return true;
