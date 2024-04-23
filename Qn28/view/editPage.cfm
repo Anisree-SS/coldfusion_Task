@@ -11,7 +11,7 @@
             <p class="text-success" id="editSuccess"></p>
             <p class="text-danger" id="error"></p>
         </div>
-        <form action="editPage.cfm"  method="post" id="editForm">
+        <form action="editPage.cfm" method="post" id="editForm">
             <div class="form-group row px-0 mx-5">
                 <input type="hidden" name="pageId" value="#variables.pageId#" id="pageId">
                 <label for="pageName " class="col-sm-2 col-form-label px-0">Page Name</label>
@@ -26,9 +26,9 @@
                 </div>
             </div>
             
-            <div class="form-group px-5 m-5 d-flex">
-                <button type="button" class="inputLogin bg-light border-0 m-1 px-5"><a href="list.cfm">Cancel</a></button>
-                <input type="submit" name="submit" value="Save" class="inputLogin loginColor m-1 px-5" id="submitBtn">
+            <div class="form-group d-flex justify-content-end  m-5">
+                <button type="button" class="bg-light border-0 m-1 px-5"><a href="list.cfm">Cancel</a></button>
+                <input type="submit" name="submit" value="Save" class="loginColor m-1 px-5" id="submitBtn">
             </div>
         </form>
         <div class="back">

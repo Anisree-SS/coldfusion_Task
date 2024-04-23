@@ -4,8 +4,8 @@
 <cfset variables.addPage=''>
 
 <cfset variables.forLogin= session.isLogin?"Log out":"Log In">
-<cfset variables.pageList=session.isLogin &&(session.role EQ "admin"||session.role EQ "editor"||session.role EQ "user")?"Page List":"">
-<cfset variables.addPage=session.isLogin &&(session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
+<cfset variables.pageList=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor"||session.role EQ "user")?"Page List":"">
+<cfset variables.addPage=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
 
 <cfoutput>
 <div class="navBar d-flex align-items-center justify-content-center col-12 ">
