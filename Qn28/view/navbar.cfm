@@ -1,11 +1,10 @@
-<cfset variables.forLogin=''>
-<cfset variables.forHome=''>
-<cfset variables.pageList=''>
-<cfset variables.addPage=''>
+<cfset variables.strLoginLink=''>
+<cfset variables.strPageListLink=''>
+<cfset variables.strAddPageLink=''>
 
-<cfset variables.forLogin= session.isLogin?"Log out":"Log In">
-<cfset variables.pageList=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor"||session.role EQ "user")?"Page List":"">
-<cfset variables.addPage=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
+<cfset variables.strLoginLink= session.isLogin?"Log out":"Log In">
+<cfset variables.strPageListLink=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor"||session.role EQ "user")?"Page List":"">
+<cfset variables.strAddPageLink=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
 
 <cfoutput>
 <div class="navBar d-flex align-items-center justify-content-center col-12 ">
@@ -14,10 +13,10 @@
         <div class="collapse navbar-collapse d-flex align-items-center justify-content-between" id="navbarColor02">
             <div class="d-flex  gap-3">
                 <a class="nav-link" href="homePage.cfm">Home</a>
-                <a class="nav-link" href="list.cfm">#variables.pageList#</a>
-                <a class="nav-link" href="editPage.cfm">#variables.addPage#</a>
+                <a class="nav-link" href="list.cfm">#variables.strPageListLink#</a>
+                <a class="nav-link" href="editPage.cfm">#variables.strAddPageLink#</a>
             </div>
-            <a class="nav-link" href="../models/pages.cfc?method=pageLogin">#variables.forLogin#</a>
+            <a class="nav-link" href="../controller/pages.cfc?method=doLogOut">#variables.strLoginLink#</a>
         </div>
     </nav>
 </div>
