@@ -1,11 +1,11 @@
-<cfinclude template="../controller/action.cfm">
+<cfinclude template="../controller/editPageAction.cfm">
 <cfinclude template ="header.cfm">
 
 <cfoutput>
     <body class="container-fluid p-0">
         <cfinclude template="navbar.cfm">
         <div class="d-flex justify-content-center mt-5">
-            <h2>#variables.heading#</h2>
+            <h2>#variables.strHeading#</h2>
         </div>
         <div class="d-flex justify-content-center forHeight">
             <p class="text-success" id="editSuccess"></p>
@@ -13,16 +13,16 @@
         </div>
         <form action="editPage.cfm" method="post" id="editForm">
             <div class="form-group row px-0 mx-5">
-                <input type="hidden" name="pageId" value="#variables.pageId#" id="pageId">
+                <input type="hidden" name="pageId" value="#variables.intPageId#" id="pageId">
                 <label for="pageName " class="col-sm-2 col-form-label px-0">Page Name</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control px-0" id="pageName" value="#variables.name#" name="pageName">
+                <input type="text" class="form-control px-0" id="pageName" value="#variables.strName#" name="strPageName">
                 </div>
             </div>
             <div class="form-group row px-0 mx-5">
                 <label for="pageDes" class="col-sm-2 col-form-label px-0">Page description</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control px-0" id="pageDes" name="pageDes" value="#variables.description#">
+                <textarea class="form-control px-0" id="pageDes" name="strPageDes"> #variables.strDescription#</textarea>
                 </div>
             </div>
             

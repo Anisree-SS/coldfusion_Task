@@ -1,10 +1,9 @@
-
 <cfinclude template = "header.cfm">
 <cfoutput>
-    <body class="container-fluid p-0">
+<body class="container-fluid p-0">
+    <cfinclude template = "navbar.cfm">
     <cfif session.isLogin>
         <cfif session.role EQ "user">
-            <cfinclude template = "navbar.cfm">
             <div class="d-flex-column m-5">
                 <div class="d-flex align-items-center p-3 mx-5">
                     <p class="h2"><i>Welcome to Page Dive! </i></p>
@@ -16,10 +15,8 @@
                     <p><b>A</b>s a user, you have access to the latest content added by our administrators. You'll see the main titles of articles, images, or multimedia on our homepage. Simply click on a title to view the full details and dive deeper into the content that interests you. Enjoy exploring and discovering new information on our platform! </p>
                 </div>
             </div>
-            <cfinclude template = "footer.cfm">
-
+            
             <cfelse>
-                <cfinclude template = "navbar.cfm">
                 <div class="d-flex align-items-center p-3 mx-5">
                     <p class="h2"><i>Welcome to Page Dive! </i></p>
                 </div>
@@ -44,11 +41,9 @@
                     </div>
                     <p>  Remove outdated or irrelevant content with ease. As an administrator, you have the power to maintain the relevance and integrity of your website by efficiently removing any unnecessary Page. </p>
                 </div>
-                <cfinclude template = "footer.cfm"> 
         </cfif>
 
         <cfelse>
-            <cfinclude template = "navbar.cfm">
             <div class="d-flex-column m-5">
                 <div class="d-flex align-items-center p-3 mx-5">
                     <p class="h2">Welcome to Page Dive!</p>
@@ -92,9 +87,9 @@
                     </div>
                     <p><b>R</b>emove outdated or irrelevant content with ease. As an administrator, you have the power to maintain the relevance and integrity of your website by efficiently removing any unnecessary Page.</p>
                 </div>
-            </div>
-            <cfinclude template = "footer.cfm">       
+            </div>      
     </cfif>
-    </body>
+    <cfinclude template = "footer.cfm">
+</body>
 </cfoutput>
 </html>

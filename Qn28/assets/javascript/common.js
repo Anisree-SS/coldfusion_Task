@@ -1,16 +1,14 @@
 $(document).ready(function() {
-
     $('#login').click(function() {
-        $("#invalid").text("");
+        $("#loginFailMsg").text("");
         var name = $('#name').val().trim(); 
         var password = $('#password').val().trim();
         if (name == ''|| password =='' ){
-            $("#invalid").html('Required user name and password');
+            $("#loginFailMsg").html('Required user name and password');
             return false;
         }
-        
         $.ajax({
-            url: './../models/pages.cfc?method=doLogin',
+            url: '../controller/pages.cfc?method=doLogin',
             type: 'post',
             data:  {userName: name , password:password},
             dataType:"json",
@@ -22,23 +20,17 @@ $(document).ready(function() {
                     },1000);
 
                 } else {
-                    $("#invalid").text('Invalid user name or password !!!!'); 
+                    $("#loginFailMsg").text('Invalid user name or password !!!!'); 
                 }
             },
-            error: function(xhr, status, error) {
-                console.log("An error occurred: " + error);
-            }
         });
         return false;
     });
 
-
     $('#editForm').on("submit",function() {
         var pageId = $('#pageId').val().trim(); 
-
         var pageName = $('#pageName').val().trim();
         $("#editSuccess").text(""); 
-
         if(validation()){
             $.ajax({
                 url: '../models/pages.cfc?method=checkPage',
@@ -46,7 +38,6 @@ $(document).ready(function() {
                 data: {pageId : pageId, pageName : pageName},
                 dataType:"json",
                 success: function(response) {
-                    console.log(response.success);
                     if(response.success){
                         doSave();
                     }
@@ -55,39 +46,33 @@ $(document).ready(function() {
                         return false;
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.log("An error occurred: " + error);
-                } 
             });
         }
         return false;
     });
 
-
     $('.deleteBtn').click(function() {
         var pageId =$(this).attr("data-id"); 
         var row=$(this);
-        if(!confirm("Are you sure you want delete the page ?")){
+        if(confirm("Are you sure you want delete the page ?")){
+            $.ajax({
+                url: '../models/pages.cfc?method=deletePage',
+                type: 'post',
+                data:  {pageId: pageId},
+                dataType:"json",
+                success: function(response) {
+                    if(response.success){
+                        row.parents('tr').remove();
+                        //$("#"+pageId).remove();
+                    } 
+                }, 
+            });
+            return true;
+        }
+        else{
             return false;
         }
-        $.ajax({
-            url: '../models/pages.cfc?method=deletePage',
-            type: 'post',
-            data:  {pageId: pageId},
-            dataType:"json",
-            success: function(response) {
-                if(response.success){
-                    row.parents('tr').remove();
-                    //$("#"+pageId).remove();
-                } 
-            },
-            error: function(xhr, status, error) {
-                console.log("An error occurred: " + error);
-            } 
-        });
-        return true;
     });
-
 
     function validation(){
         var errorMsg="";
@@ -111,7 +96,6 @@ $(document).ready(function() {
         }
         return true;
     } 
-
 
     function delayRedirect(){
         setTimeout(function() {
@@ -139,11 +123,7 @@ $(document).ready(function() {
                     $("#error").html(response.msg);    
                 }
             },
-            error: function(xhr, status, error) {
-                console.log("An error occurred: " + error);
-            } 
         });
         return false;
     }
-
 });
