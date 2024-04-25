@@ -3,10 +3,10 @@
 <body class="container-fluid p-0">
     <cfinclude template = "navbar.cfm">
     <cfif session.isLogin>
-        <cfif session.role EQ "user">
+        <cfif session.strRole EQ "user">
             <div class="d-flex-column m-5">
                 <div class="d-flex align-items-center p-3 mx-5">
-                    <p class="h2"><i>Welcome to Page Dive! </i></p>
+                    <p class="h2"><i>Welcome #session.strfullName# to Page Dive! </i></p>
                 </div>
                 <div class="d-flex-column align-items-center p-3 border border border-light bg-light mx-5">
                     <div class="d-flex align-items-center justify-content-center mb-2">
@@ -18,7 +18,7 @@
             
             <cfelse>
                 <div class="d-flex align-items-center p-3 mx-5">
-                    <p class="h2"><i>Welcome to Page Dive! </i></p>
+                    <p class="h2"><i>Welcome #session.strfullName# to Page Dive! </i></p>
                 </div>
                 <div class="d-flex-column align-items-center p-3 border border border-light bg-light mx-5 my-1">
                     <b class="h5">Add Page</b>

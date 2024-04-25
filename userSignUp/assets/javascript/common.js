@@ -1,22 +1,19 @@
 $(document).ready(function() {
     $('#signUpForm').on("submit",function() {
-        var strFullName = $('#strFullName').val().trim(); 
         var strUserName = $('#strUserName').val().trim();
-        var strPassword = $('#strPassword').val().trim();
-        var strRole = $('#strRole').val().trim();
-        $("#editSuccess").text(""); 
+        $("#successMsg").text(""); 
         if(validation()){
             $.ajax({
-                url: '../models/pages.cfc?method=checkPage',
+                url: 'controllers/main/main.cfc?method=checkUserName',
                 type: 'post',
-                data: {strFullName : strFullName,strUserName : strUserName,strPassword : strPassword,strRole:strRole},
+                data: {strUserName : strUserName},
                 dataType:"json",
                 success: function(response) {
                     if(response.success){
-    
+                        doSave();
                     }
                     else{
-                        $("#error").html(response.msg);    
+                        $("#successMsg").html(response.msg).css("color", "red");    
                         return false;
                     }
                 },
@@ -25,42 +22,77 @@ $(document).ready(function() {
         return false;
     });
 
-    function validation(){
+    function doSave(){
         var strFullName = $('#strFullName').val().trim(); 
         var strUserName = $('#strUserName').val().trim();
         var strPassword = $('#strPassword').val().trim();
         var strRole = $('#strRole').val().trim();
+        $("#successMsg").text(""); 
+        $.ajax({
+            url:'controllers/main/main.cfc?method=doSave',
+            type: 'post',
+            data:{strUserName:strUserName,strPassword:strPassword,strRole:strRole,strFullName:strFullName},
+            dataType:"json",
+            success: function(response) {
+                if(response.success){
+                    $("#successMsg").html(response.msg).css("color","green");
+                    setTimeout(function() {
+                        $("#successMsg").html("");
+                        $("form")[0].reset();
+                    },1000);
+                }
+                else{
+                    $("#successMsg").html("something went wrong!!").css("color", "red");    
+                }
+            },
+        });
+        return false;
+    }
+
+    function validation(){
+        var strFullName = $('#strFullName').val().trim(); 
+        var strUserName = $('#strUserName').val().trim();
+        var strPassword = $('#strPassword').val().trim();
+        var strConfirmPassword = $('#strConfirmPassword').val().trim();
+        var strRole = $('#strRole').val().trim();
+        var specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+        var alphabets = /[A-z]/g;
+        var number = /[0-9]/g;
         errorMsg='';
-        $("#success").text(""); 
-        $("#failMsg").text(""); 
-        if(strFullName==''){
-            errorMsg+="<br>Full name is required";
+        $("#successMsg").text(""); 
+        var specialCharName = specialChar.test(strFullName);
+        var numberName = number.test(strFullName);
+        var specialCharUserName = specialChar.test(strFullName);
+        var numberUserName = number.test(strFullName);
+        if((strFullName=='')||(strUserName=="")||(strPassword=="")||(strConfirmPassword=='')||(strRole=='')){
+            errorMsg+="All fields required<br>";
         }
-        else if(/\d/.test(strFullName)){
-            errorMsg+="<br>Full name should be in string"; 
+        if(((specialCharName) || (numberName))){
+            errorMsg+="Full name should be in string<br>"; 
         }
-
-        if(strUserName==''){
-            errorMsg+="<br>User name is required";
+        if (((specialCharUserName) || (numberUserName))){
+            errorMsg+="User name should be in string<br>"; 
         }
-        else if (/\d/.test(strUserName)){
-            errorMsg+="<br>User name should be in string"; 
+        if(strPassword!=''){
+            if(strPassword.match(" "))
+                errorMsg+="Space is not allowed<br>";
+            else{
+                var specialChar = specialChar.test(strPassword);
+                var  alphabets= alphabets.test(strPassword);
+                var number = number.test(strPassword);
+                if(!((specialChar) && (alphabets) && (number))){
+                    errorMsg+="Password should contain all type values";
+                }
+            }
         }
-
-        if(strPassword ==''){
-            errorMsg+="<br>Password is required"; 
+        if((strConfirmPassword!='')&&(strConfirmPassword!=strPassword)){
+            errorMsg+="Password is not matching<br>";
         }
-
-        if(strRole==''){
-            errorMsg+="<br>Select role";
-        }
-    
         if(errorMsg !==''){
-            $("#failMsg").html(errorMsg);
+            $("#successMsg").html(errorMsg).css("color", "red");
             return false;
         }
         else{
-            $("#success").html(""); 
             return true;
         }
     }

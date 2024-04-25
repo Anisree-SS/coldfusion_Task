@@ -10,7 +10,7 @@ $(document).ready(function() {
         $.ajax({
             url: '../controller/pages.cfc?method=doLogin',
             type: 'post',
-            data:  {userName: name , password:password},
+            data:  {struserName: name , strpassword:password},
             dataType:"json",
             success: function(response) {
                 if (response.success){
@@ -35,7 +35,7 @@ $(document).ready(function() {
             $.ajax({
                 url: '../models/pages.cfc?method=checkPage',
                 type: 'post',
-                data: {pageId : pageId, pageName : pageName},
+                data: {intpageId : pageId, strpageName : pageName},
                 dataType:"json",
                 success: function(response) {
                     if(response.success){
@@ -58,7 +58,7 @@ $(document).ready(function() {
             $.ajax({
                 url: '../models/pages.cfc?method=deletePage',
                 type: 'post',
-                data:  {pageId: pageId},
+                data:  {intpageId: pageId},
                 dataType:"json",
                 success: function(response) {
                     if(response.success){
@@ -111,7 +111,7 @@ $(document).ready(function() {
         $.ajax({
             url:'../controller/pages.cfc?method=savePage',
             type: 'post',
-            data:{ pageId : pageId, pageName : pageName, pageDes : pageDes},
+            data:{ intpageId : pageId, strpageName : pageName, strpageDes : pageDes},
             dataType:"json",
             success: function(response) {
                 $("#error").html("");

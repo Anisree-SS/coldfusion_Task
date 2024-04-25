@@ -3,8 +3,9 @@
 <cfset variables.strAddPageLink=''>
 
 <cfset variables.strLoginLink= session.isLogin?"Log out":"Log In">
-<cfset variables.strPageListLink=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor"||session.role EQ "user")?"Page List":"">
-<cfset variables.strAddPageLink=session.isLogin AND (session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
+<cfset variables.strPageListLink=session.isLogin?"Page List":"">
+<cfset variables.strfullName=session.isLogin?"#session.strfullName#":"">
+<cfset variables.strAddPageLink=session.isLogin AND (session.strRole EQ "admin"||session.strRole EQ "editor")?"Add Page":"">
 
 <cfoutput>
 <div class="navBar d-flex align-items-center justify-content-center col-12 ">
@@ -16,7 +17,10 @@
                 <a class="nav-link" href="list.cfm">#variables.strPageListLink#</a>
                 <a class="nav-link" href="editPage.cfm">#variables.strAddPageLink#</a>
             </div>
+            <div class="d-flex gap-2">
+            <a class="nav-link">#variables.strfullName#</a>
             <a class="nav-link" href="../controller/pages.cfc?method=doLogOut">#variables.strLoginLink#</a>
+            </div>
         </div>
     </nav>
 </div>

@@ -15,8 +15,8 @@
         <cfset session.captchaText = RandRange(1000, 9999)>
         <cfset session.mystruct=structNew("ordered")>
         <cfset session.login = false>
-        <cfset session.role=''>
-        <cfset session.pageId=''>
+        <cfset session.strRole=''>
+        <cfset session.strfullName=''>
         <cfset session.isLogin=false>
         <cfreturn true>
     </cffunction>    

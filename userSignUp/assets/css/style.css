@@ -11,6 +11,10 @@ body{
     color:red;
 }
 
+.success{
+    color:green;
+}
+
 h3{
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
@@ -106,7 +110,7 @@ a{
     text-decoration: none;
 }
 .forHeight{
-    height: 100px;
+    height:50px;
 }
 
 .btnpos{
