@@ -4,10 +4,10 @@
     <cfoutput>
         <cfinclude template = "navbar.cfm">
         <div class="d-flex justify-content-center">
-            <h3>#pageName#</h3>
+            <h3>#variables.qryGetData.pageName#</h3>
         </div>
         <div class="d-flex-column align-items-center p-3 border border border-light mx-5 ">
-            <p class="heights">#pageDes#</p>
+            <p class="heights">#variables.qryGetData.pageDes#</p>
         </div>        
         <div class="back">
             <a href="list.cfm"><img src="../assets/images/arrow.png" alt="back" class="backStyle"></a>

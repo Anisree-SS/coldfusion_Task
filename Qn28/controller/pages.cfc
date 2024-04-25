@@ -1,21 +1,21 @@
 component {
-    remote any function savePage(pageId,pageName,pageDes) returnFormat="JSON" {
+    remote any function savePage(intpageId,strpageName,strpageDes) returnFormat="JSON" {
         local.error='';
-        if(len(trim(pageName)) EQ 0 ){
+        if(len(trim(strpageName)) EQ 0 ){
              local.error&="Page name is required!!"&"<br>";
         }
-        else if ((REFind("\d", pageName)) OR (len(pageName) GT 40)){
+        else if ((REFind("\d", strpageName)) OR (len(strpageName) GT 40)){
             local.error&="Page name should be string with less than 40 letters!! "&"<br>";
         }
-        if(len(trim(pageDes)) EQ 0){
+        if(len(trim(strpageDes)) EQ 0){
             local.error&="Page description is required!!"&"<br>";
         }
-        else if(isNumeric(pageDes)){
+        else if(isNumeric(strpageDes)){
             local.error&="Page description is required strings also!!"&"<br>";
         }
         if(len(local.error) EQ 0){
             local.update=createObject("component","CFC.pages");
-            local.editMsg=local.update.savePage(pageName,pageDes,pageId);
+            local.editMsg=local.update.savePage(strpageName,strpageDes,intpageId);
             return local.editMsg;  
         }
         else{
@@ -34,10 +34,17 @@ component {
         cflocation(url="../view/login.cfm");
     }
 
-    remote any function doLogin(userName,password) returnFormat="JSON"{
-        local.password=Hash(arguments.password,"MD5");
-        local.doLogin=createObject("component","CFC.pages").doLogin(userName,password);
-        return local.doLogin;
+    remote any function doLogin(struserName,strpassword) returnFormat="JSON"{
+        local.strpassword=Hash(arguments.strpassword,"MD5");
+        local.getQuery=createObject("component","CFC.pages").doLogin(struserName,strpassword);
+        if (local.getQuery.recordCount) {
+            session.userRole = local.getQuery.role;
+            session.Firstname=local.getQuery.fullName;
+            session.isLogin = true;
+            return { "success": true };
+        } else {
+            return { "success": false };
+        }
     }
 
 }

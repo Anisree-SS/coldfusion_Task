@@ -3,7 +3,7 @@
 <cfinclude template = "header.cfm">
 <body class="container-fluid p-0">
 <cfinclude template="navbar.cfm">
-<cfif session.role EQ "admin" OR session.role EQ "editor">
+<cfif session.strRole EQ "admin" OR session.strRole EQ "editor">
     <div class="labelStyle">
         <h3>Page List</h3>
     </div>

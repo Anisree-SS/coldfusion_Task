@@ -3,8 +3,8 @@
 <cfset variables.strAddPageLink=''>
 
 <cfset variables.strLoginLink= session.isLogin?"Log out":"Log In">
-<cfset variables.strPageListLink=session.isLogin &&(session.role EQ "admin"||session.role EQ "editor" ||session.role EQ "user")?"Page List":"">
-<cfset variables.strAddPageLink=session.isLogin &&(session.role EQ "admin"||session.role EQ "editor")?"Add Page":"">
+<cfset variables.strPageListLink=session.isLogin?"Page List":"">
+<cfset variables.strAddPageLink=session.isLogin AND (session.strRole EQ "admin"||session.strRole EQ "editor")?"Add Page":"">
 
 <cfoutput>
     <footer class="footerHeight bg-light d-flex justify-content-center align-items-center ">
