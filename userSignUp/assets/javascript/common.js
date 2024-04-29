@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#successMsg").text(""); 
         if(validation()){
             $.ajax({
-                url: 'controllers/main/main.cfc?method=checkUserName',
+                url: 'controllers/signUp.cfc?method=checkUserName',
                 type: 'post',
                 data: {strUserName : strUserName},
                 dataType:"json",
@@ -29,7 +29,7 @@ $(document).ready(function() {
         var strRole = $('#strRole').val().trim();
         $("#successMsg").text(""); 
         $.ajax({
-            url:'controllers/main/main.cfc?method=doSave',
+            url:'controllers/signUp.cfc?method=doSave',
             type: 'post',
             data:{strUserName:strUserName,strPassword:strPassword,strRole:strRole,strFullName:strFullName},
             dataType:"json",
