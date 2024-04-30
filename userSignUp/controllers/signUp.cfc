@@ -11,7 +11,7 @@ component {
         if(REFind('\d', strUserName)){
             local.errorMsg &= "User name should be in string<br>";
         }
-        if(!REfind(regexPassword,strPassword) AND (len(trim(strPassword)))NEQ 0){
+        if(!REfind(regexPassword,strPassword) AND (len(trim(strPassword))) NEQ 0){
             local.errorMsg &= "Password should contain all type values<br>";
         }
         if(strPassword NEQ strConfirmPassword AND len(trim(strConfirmPassword) NEQ 0)){
@@ -21,7 +21,7 @@ component {
            return {"success":true};
         }
         else{
-            return {"success":false,"msg":"#local.errorMsg#","class":"error"};
+            return {"success":false,"msg":local.errorMsg,"class":"error"};
         }
     }
 
@@ -38,7 +38,7 @@ component {
     remote any function addUser(strUserName,strPassword,strRole,strFullName) returnFormat="json"{
         local.strPassword = Hash(arguments.strPassword,"MD5");
         local.checkObj = createObject("component","models.signUp").addUser(strUserName = strUserName,strPassword =  local.strPassword,strRole = strRole,strFullName = strFullName);
-        if(local.checkObj){
+        if(local.checkObj EQ "true"){
             return {"success":true,"msg":"successfully added","class":"success"};
         }
         else{
