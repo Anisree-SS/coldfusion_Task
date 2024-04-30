@@ -1,4 +1,3 @@
-<cfinclude template ="../controllers/signUpAction.cfm">
 <cfinclude template ="header.cfm">
 <body>
 <cfoutput>

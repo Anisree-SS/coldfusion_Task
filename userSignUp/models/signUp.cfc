@@ -1,18 +1,18 @@
 <cfcomponent>
-    <cffunction name = "checkUserExists" access = "remote" returntype="boolean">
+    <cffunction name = "checkUserExists" access = "remote" >
         <cfargument name="strUserName" required="true" type="string">
         <cfquery name="qryCheckUserName" datasource = "demo">
             select 1 from loginTable
             where userName=<cfqueryparam value="#arguments.strUserName#" cfsqltype="cf_sql_varchar">
         </cfquery>
-        <cfif qryCheckUserName.recordCount>
+        <cfif qryCheckUserName.recordCount EQ 1>
             <cfreturn false>
         <cfelse>
             <cfreturn true>
         </cfif>
     </cffunction>
 
-    <cffunction name="addUser" access="remote" returntype="boolean">
+    <cffunction name="addUser" access="remote">
         <cfargument name="strUserName" required="true" type="string">
         <cfargument name="strPassword" required="true" type="string">
         <cfargument name="strRole" required="true" type="string">

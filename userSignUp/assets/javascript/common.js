@@ -1,3 +1,4 @@
+// client side validation for reference 
 $(document).ready(function() {
     $('#signUpForm').on("submit",function() {
         var strUserName = $('#strUserName').val().trim();
