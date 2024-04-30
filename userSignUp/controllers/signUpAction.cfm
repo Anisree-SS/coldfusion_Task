@@ -18,4 +18,3 @@
             variables.errorMsg = local.resultfrt;
     }
 </cfscript>
-
