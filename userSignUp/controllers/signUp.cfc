@@ -5,17 +5,19 @@ component {
         if(len(trim(strFullName)) EQ 0 OR len(trim(strUserName)) EQ 0 OR len(trim(strPassword)) EQ 0 OR len(trim(strConfirmPassword)) EQ 0 OR len(trim(strRole)) EQ 0){
             local.errorMsg &= "All fields required<br>";
         }
-        if(REFind('\d', strFullName)){
-            local.errorMsg &= "Full name should be in string<br>";
-        }
-        if(REFind('\d', strUserName)){
-            local.errorMsg &= "User name should be in string<br>";
-        }
-        if(!REfind(regexPassword,strPassword) AND (len(trim(strPassword))) NEQ 0){
-            local.errorMsg &= "Password should contain all type values<br>";
-        }
-        if(strPassword NEQ strConfirmPassword AND len(trim(strConfirmPassword) NEQ 0)){
-            local.errorMsg &= "Password is not matching<br>";
+        else{
+            if(REFind('\d', strFullName)){
+                local.errorMsg &= "Full name should be in string<br>";
+            }
+            if(REFind('\d', strUserName)){
+                local.errorMsg &= "User name should be in string<br>";
+            }
+            if(!REfind(regexPassword,strPassword)){
+                local.errorMsg &= "Password should contain all type values<br>";
+            }
+            if(strPassword NEQ strConfirmPassword){
+                local.errorMsg &= "Password is not matching<br>";
+            }
         }
         if(local.errorMsg EQ ''){
            return {"success":true};

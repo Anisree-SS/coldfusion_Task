@@ -17,16 +17,17 @@
         <cfargument name="strPassword" required="true" type="string">
         <cfargument name="strRole" required="true" type="string">
         <cfargument name="strFullName" required="true" type="string">
+        <cfset local.success = ''>
+        <cfquery name="qrySaveUser" datasource = "demo" result="qryAddUser">
+            insert into loginTable(userName,password,role,fullName)
+            values(
+                <cfqueryparam value="#arguments.strUserName#" cfsqltype="cf_sql_varchar">,
+                <cfqueryparam value="#arguments.strPassword#" cfsqltype="cf_sql_varchar">,
+                <cfqueryparam value="#arguments.strRole#" cfsqltype="cf_sql_varchar">,
+                <cfqueryparam value="#arguments.strFullName#" cfsqltype="cf_sql_varchar">
+            )
+        </cfquery>
         <cftry>
-            <cfquery name="qrySaveUser" datasource = "demo" result="qryAddUser">
-                insert into loginTable(userName,password,role,fullName)
-                values(
-                    <cfqueryparam value="#arguments.strUserName#" cfsqltype="cf_sql_varchar">,
-                    <cfqueryparam value="#arguments.strPassword#" cfsqltype="cf_sql_varchar">,
-                    <cfqueryparam value="#arguments.strRole#" cfsqltype="cf_sql_varchar">,
-                    <cfqueryparam value="#arguments.strFullName#" cfsqltype="cf_sql_varchar">
-                )
-            </cfquery>
             <cfif qryAddUser.recordCount>
                 <cfset local.success = "true">
             </cfif>
