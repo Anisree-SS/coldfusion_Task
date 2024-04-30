@@ -5,7 +5,7 @@
             select 1 from loginTable
             where userName=<cfqueryparam value="#arguments.strUserName#" cfsqltype="cf_sql_varchar">
         </cfquery>
-        <cfif qryCheckUserName.recordCount EQ 1>
+        <cfif qryCheckUserName.recordCount>
             <cfreturn false>
         <cfelse>
             <cfreturn true>

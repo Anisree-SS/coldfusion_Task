@@ -24,6 +24,7 @@ component {
             return {"success":false,"msg":"#local.errorMsg#","class":"error"};
         }
     }
+
     remote any function checkUserExists(strUserName) returnFormat ="json"{
         local.checkObj = createObject("component","models.signUp").checkUserExists(strUserName = strUserName);
         if(local.checkObj){
@@ -33,6 +34,7 @@ component {
             return {"success":false,"msg":"User name already present", "class":"error"};
         }
     }
+    
     remote any function addUser(strUserName,strPassword,strRole,strFullName) returnFormat="json"{
         local.strPassword = Hash(arguments.strPassword,"MD5");
         local.checkObj = createObject("component","models.signUp").addUser(strUserName = strUserName,strPassword =  local.strPassword,strRole = strRole,strFullName = strFullName);
