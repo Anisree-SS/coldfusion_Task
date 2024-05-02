@@ -9,11 +9,11 @@
             </div>
             <div class="form-group">
                 <label for="strFullName">Full Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="strFullName" name="strFullName">
+                <input type="text" class="form-control" id="strFullName" name="strFullName" value="#variables.strFullName#">
             </div>
             <div class="form-group">
                 <label for="strUserName">User Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="strUserName" name="strUserName">
+                <input type="text" class="form-control" id="strUserName" name="strUserName" value="#variables.strUserName#">
             </div>
             <div class="form-group">
                 <label for="strPassword">Password<span class="text-danger">*</span></label>
@@ -25,11 +25,11 @@
             </div>
             <div class="form-group">
                 <label for="strRole">Select role<span class="text-danger">*</span></label>
-                <select class="form-control" id="strRole" name="strRole">
-                    <option></option>
-                    <option>user</option>
-                    <option>admin</option>
-                    <option>editor</option>
+                <select class="form-control" id="strRole" name="strRole" >
+                    <option value=""></option>
+                    <option value="user" <cfif variables.strRole EQ "user">selected</cfif>>User</option>
+                    <option value="admin" <cfif variables.strRole EQ "admin">selected</cfif>>admin</option>
+                    <option value="editor" <cfif variables.strRole EQ "editor">selected</cfif>>editor</option>
                 </select>
             </div>
             <div class="form-group d-flex justify-content-end  m-5">
